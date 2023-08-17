@@ -100,6 +100,8 @@ AUTH_PROFILE_MODULE = "accounts.UserProfile"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+DATABASE = 1
+
 if DEBUG and (DATABASE == 1):
     DATABASES = {
         'default': {

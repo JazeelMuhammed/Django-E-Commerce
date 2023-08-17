@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- ========================= SECTION MAIN ========================= -->
+
+
+<section class="section-intro pb-0 mb-0">
+
+<div class="intro-banner-wrap pb-0 mb-0">
+	<div class="slides pb-0 mb-0">
+		<input type="radio" name="radio-btn" id="radio1">
+		<input type="radio" name="radio-btn" id="radio2">
+		<input type="radio" name="radio-btn" id="radio3">
+		<input type="radio" name="radio-btn" id="radio4">
+
+
+		<div class="slide first">
+			<img src="{% static 'images/slideshow1.webp' %}" class="active m-0 p-0 img-fluid" style="width: 150%; height: 450px;">
+			<div class="slide-info">
+				<h3>  BARCELONA<br/><small>2023-24 KIT</small></h3>
+				<a href="/store/fc-barcelona/" class="btn">SHOP NOW</a>
+			</div>
+		</div>
+
+		<div class="slide">
+			<img src="{% static 'images/arg-banner.webp' %}" class="active m-0 p-0 img-fluid" style="width: 150%; height: 450px;">
+			<div class="slide-info2">
+				<a href="/store/argentina/" class="btn" style="margin-top: ">SHOP NOW</a>
+			</div>
+		</div>
+
+		<div class="slide">
+			<img src="{% static 'images/banners/arsenal banner.webp' %}" class="active m-0 p-0 img-fluid" style="width: 150%; height: 450px;">
+			<div class="slide-info">
+				<h3 class="text-dark" style="font-family: Verdana, Geneva, Tahoma; font-size: 36px;">  ARSENAL LATEST<br/>
+					<small class="text-dark" style="font-family: Verdana, Geneva, Tahoma,; font-size: 28px;">KIT IS HERE</small>
+				</h3>
+				<a href="/store/arsenal/" class="btn bg-dark" style="border: none;">SHOP NOW</a>
+			</div>
+		</div>
+
+		<div class="slide">
+			<img src="{% static 'images/banners/man utd banner.jpg' %}" class="active m-0 p-0 img-fluid" style="width: 150%; height: 483px;">
+			<div class="slide-info4">
+				<a href="store/manchester-united/" class="btn">SHOP NOW</a>
+			</div>
+		</div>
+
+	    <!-- automatic navigation start -->
+		<div class="navigation-auto">
+			<div class="auto-btn1"></div>
+			<div class="auto-btn2"></div>
+			<div class="auto-btn3"></div>
+			<div class="auto-btn4"></div>
+		</div>
+	    <!-- automatic navigation end -->
+	</div>
+	<!-- manual navigation start -->
+	<div class="navigation-manual">
+		<label for="radio1" class="manual-btn"></label>
+		<label for="radio2" class="manual-btn"></label>
+		<label for="radio3" class="manual-btn"></label>
+		<label for="radio4" class="manual-btn"></label>
+	</div>
+	<!-- manual navigation end -->
+
+</div>
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-b-sm pt-0 mt-0 home">
+<div class="container mb-5">
+
+	<div class="row px-lg-4 mx-sm-2 mx-md-2 maradona" style="margin-bottom: 9rem;">
+		<div class="col-lg-6 col-sm-12 col-md-6">
+			<div class="maradona-img">
+				<img src="{% static 'images/diego.webp' %}" alt="">
+			</div>
+		</div>
+		<div class="col-lg-6 col-sm-12 col-md-6 text-start px-3">
+			<div class="maradona-info mt-sm-3 mt-md-2 mb-lg-3">
+				<div class="maradona-heading">
+					<h1 style="font-family: serif; font-size: 38px; font-weight: 400;">MARADONA  COLLECTION</h1>
+				</div>
+				<div class="info mt-lg-4 mt-md-4 mt-sm-4">
+					<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: 400; font-size: 16px;">The ultimate tribute to honour the legacy of arguably</p>
+					<p style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: 400; font-size: 16px;">the greatest footballer the world has ever seen</p>
+				</div>
+			</div>
+			<a href="{% url 'maradona' %}" class="btn btn-secondary px-5 py-2 mt-lg-5 mt-md-5 mt-sm-5" style="border-radius: 0; font-size: 20px; font-family: 'Lucida Console', 'Courier New', monospace;">SHOP NOW</a>
+		</div>
+	</div>
+
+	<header class="heading">
+		<h3>Best Sellers</h3>
+	</header>
+
+	<div class="row" style="margin-bottom: 120px;">
+		{% for product in trending_products %}
+		<div class="col-md-3 col-sm-6">
+			<div class="product-grid">
+				<div class="product-image">
+					<a href="#" class="image">
+					{% if product.product_img2 %}
+						<img src="{{ product.product_img.url }}" alt="jersey" class="img-fluid pre-img">
+						<img src="{{ product.product_img2.url }}" alt="jersey" class="img-fluid top-img" style="height: 100%; width: 100%">
+					{% else %}
+					    <img src="{{ product.product_img.url }}" alt="jersey" class="img-fluid">
+					{% endif %}
+					</a>
+					<span class="product-discount-label">{{ product.discount_rate }}%</span>
+					<ul class="product-links">
+						<li><a href="#"><i class="fas fa-shopping-bag"></i></a></li>
+						<li><a href="{% url 'product_details' product.pk %}"><i class="fas fa-eye"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+
+    <header class="heading">
+		<h3>Iconic Jerseys</h3>
+	</header>
+	
+	<div class="row mb-4" id="products_container">
+		{% for product in iconic_products %}
+		<div class="col-md-3 col-sm-6 mb-3">
+			<div class="product-grid product-box">
+				<div class="product-image">
+					<a href="#" class="image">
+					{% if product.product_img2 %}
+						<img src="{{ product.product_img.url }}" alt="jersey" class="img-fluid pre-img">
+						<img src="{{ product.product_img2.url }}" alt="jersey" class="img-fluid top-img" style="height: 100%; width: 100%">
+					{% else %}
+					    <img src="{{ product.product_img.url }}" alt="jersey" class="img-fluid">
+					{% endif %}
+					</a>
+					<span class="product-discount-label">{{ product.discount_rate }}%</span>
+					<ul class="product-links">
+						<li><a href="#"><i class="fas fa-shopping-bag"></i></a></li>
+						<li><a href="{% url 'product_details' product.pk %}"><i class="fas fa-eye"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="load-more pt-0 mt-0 d-flex justify-content-center" style="margin-bottom: 100px;">
+		<div class="spinner-border text-primary my-2 not-visible" role="status" id="spinner">
+			<span class="sr-only">Loading...</span>
+		</div>
+		<div class="load-more__btn mt-0" id="load_box">
+			<button type="button" class="btn btn-success px-5" id="load_btn">Load More</button>
+		</div>
+		<div class="alert alert-danger my-2 not-visible" role="alert" id='alert'>
+			No more post to load!!
+		</div>
+	</div>
+	
+
+	<header class="heading">
+		<h3>Featured Jerseys</h3>
+	</header>
+	<div class="row mb-5">
+		{% for product in products %}
+		<div class="col-md-3 col-sm-6">
+			<div class="product-grid product-box">
+				<div class="product-image">
+					<a href="#" class="image">
+					{% if product.product_img2 %}
+						<img src="{{ product.product_img.url }}" alt="jersey" class="img-fluid pre-img">
+						<img src="{{ product.product_img2.url }}" alt="jersey" class="img-fluid top-img" style="height: 100%; width: 100%">
+					{% else %}
+					    <img src="{{ product.product_img.url }}" alt="jersey" class="img-fluid">
+					{% endif %}
+					</a>
+					<span class="product-discount-label">{{ product.discount_rate }}%</span>
+					<ul class="product-links">
+						<li><a href="#"><i class="fas fa-shopping-bag"></i></a></li>
+						<li><a href="{% url 'product_details' product.pk %}"><i class="fas fa-eye"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+		<div class="d-flex justify-content-center w-100">
+			<a href="{% url 'store' %}" class="btn btn-outline-primary px-5 text-center">See All</a>
+		</div>
+
+</div><!-- container // -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+	const productsBox = document.getElementById('products_container');
+	console.log(productsBox)
+	const spinnerBox = document.getElementById('spinner');
+	const loadBtn = document.getElementById('load_btn');
+	const loadBox = document.getElementById('load_box');
+
+	const desiredDiv = document.getElementById('desiredDiv');
+
+	var host = document.location.host
+
+	let visible = 8
+    
+	const handleGetProduct = () => {
+		$.ajax({
+		    type: 'GET',
+			url: `/products-json/${visible}/`,
+			success: function(response){
+			//	console.log(response.max_iconic_size)
+			    const max_iconic_size = response.max_iconic_size
+				const data = response.iconic_data
+
+			// We are showing the spinner if there are products
+			   spinnerBox.classList.remove('not-visible');
+                
+			    setTimeout(() => {
+					spinnerBox.classList.add('not-visible');
+					data.map(product => {
+						console.log(product);
+
+						productsBox.innerHTML += 
+
+						`<div class="col-md-3 col-sm-6">
+							<div class="product-grid">
+								<div class="product-image">
+									<a href="#" class="image">
+										<img src="media/${product.product_img}" alt="jersey" class="img-fluid pre-img">
+										<img src="media/${product.product_img2}" alt="jersey" class="img-fluid top-img" style="height: 100%; width: 100%">
+									</a>
+									<span class="product-discount-label">${((product.actual_price - product.discount_price) / product.actual_price * 100).toFixed(0)}%</span>
+									<ul class="product-links">
+										<li><a href="#"><i class="fas fa-search"></i></a></li>
+										<li><a href="http://${host}/store/product_details/${product.id}/"><i class="fas fa-eye"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>`
+
+					})
+				}, 500)
+				
+				if (max_iconic_size){
+					console.log('done')
+					loadBox.innerHTML = "<h4 class='text-danger'>No more products to load</h4>"
+				}
+
+			},
+			error: function(error){
+				console.log(error)
+			}
+		})
+	}
+
+	loadBtn.addEventListener('click', ()=>{
+		visible += 4	
+		handleGetProduct()	
+	})
+
+
+<!-- To Auto Scroll the Carousal -->
+	var counter = 1;
+	setInterval(function(){
+	  document.getElementById('radio' + counter).checked = true;
+	  counter ++;
+	  if(counter > 4){
+		counter = 1;
+	  }
+	}, 5000)
+
+</script>
+
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+{% endblock %}

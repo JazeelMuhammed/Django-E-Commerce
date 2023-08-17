@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<<section class="section-content padding-y bg">>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="shopping-cart">
+                    <div class="cart-header d-none d-sm-none d-mb-block d-lg-block">
+                        <div class="row mb-3">
+
+                            <div class="col-md-4">
+                                <h4>Products</h4>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h4>Price</h4>
+                            </div>
+
+                            <div class="col-md-3">
+                                <h4>Add to Cart</h4>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h4>Remove</h4>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="cart-item">
+                        {% if wished_products %}
+                        {% for product in wished_products %}
+                            <div class="row">
+                                <div class="col-md-4 my-auto">
+                                    <a href="{{ product.get_url }}">
+                                        <label class="product-name">
+                                            <img src="{{ product.product_img.url }}" style="width: 50px; height: 50px" alt="">
+                                            {{ product.product_name }}
+                                        </label>
+                                    </a>
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                    <label class="price">${{ product.discount_price }} </label>
+                                </div>
+
+                                <div class="col-md-3 col-7 my-auto">
+                                    <form action="{% url 'add_to_cart' product.pk %}" method="POST">
+                                        <button type="submit" class="btn btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
+                                    </form>
+                                </div>
+
+                                <div class="col-md-2 col-5 my-auto">
+                                    <div class="remove">
+                                        <a href="" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash"></i> Remove
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

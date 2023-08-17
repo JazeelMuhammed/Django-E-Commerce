@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y gradient-custom">
+
+<!-- ============================ COMPONENT REGISTER   ================================= -->
+	<div class="card mx-auto rounded" style="max-width:520px; margin-top:30px;">
+      <article class="card-body">
+		<form action="{% url 'register' %}" method="POST">
+			{% csrf_token %}
+            <fieldset>
+                <legend class="form-group border-bottom mb-3" style="font-size: 32px;">Register</legend>
+                <div class="form-row">
+					<div class="col form-group">
+						<label>First name</label>
+                        {{ form.first_name }}
+					</div> <!-- form-group end.// -->
+					<div class="col form-group">
+						<label>Last name</label>
+                        {{ form.last_name }}
+					</div> <!-- form-group end.// -->
+				</div> <!-- form-row end.// -->
+
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label>Email</label>
+                        {{ form.email }}
+				    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                        <label>Phone</label>
+                        {{ form.phone }}
+                    </div>
+                </div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Create password</label>
+                        {{ form.password }}
+					</div> <!-- form-group end.// -->
+					<div class="form-group col-md-6">
+						<label>Repeat password</label>
+                        {{ form.conf_password }}
+					</div> <!-- form-group end.// -->
+				</div>
+            </fieldset>
+
+			    <div class="form-group mt-2">
+			        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+			    </div> <!-- form-group// -->
+			{{ form.email.errors }}
+			{{ form.non_field_errors }}
+			</form>
+            <p class="text-center mt-4">Have an account? <a href="{% url 'register' %}">Log In</a></p>
+		</article><!-- card-body.// -->
+    </div> <!-- card .// -->
+<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

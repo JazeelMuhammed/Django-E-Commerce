@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container mt-5">
+<div class="row flex-lg-nowrap">
+{% include 'includes/dashboard_sidebar.html' %}
+  <div class="col-lg-9 col-sm-12 col-md-9">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 100px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 100px;">
+                      {% if userprofile.profile_img %}
+                      <span><img class="rounded-circle" src="{{ userprofile.profile_img.url }}" width="100" height="100" alt="Profile picture" /></span>
+                      {% else %}
+                      <span><img class="rounded-circle" src="{% static 'images/avatars/profile.jpg' %}" width="100" height="100" alt="Profile picture" /></span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h5 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{ user.fullname }}</h5>
+                    <p class="mb-0">{{ user.email }}</p>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+
+                  <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col-sm-12 col-lg-6 col-md-6">
+                            <div class="form-group">
+                              <label>First Name</label>
+                              {{ user_form.first_name }}
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-lg-6 col-md-6">
+                            <div class="form-group">
+                              <label>Last Name</label>
+                              {{ user_form.last_name }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-lg-6 col-md-6">
+                            <div class="form-group">
+                              <label>Phone</label>
+                              {{ user_form.phone }}
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-lg-6 col-md-6">
+                            <div class="form-group">
+                              <label>Profile Image</label>
+                              {{ profile_form.profile_img }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <label>Address</label>
+                              {{ profile_form.address_1 }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4 col-md-4">
+                            <div class="form-group">
+                              <label>City</label>
+                              {{ profile_form.city }}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-4 col-md-4">
+                            <div class="form-group">
+                              <label>State</label>
+                              {{ profile_form.state }}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-4 col-md-4">
+                            <div class="form-group">
+                              <label>Country</label>
+                              {{ profile_form.country }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col d-flex justify-content-end">
+                        <input class="btn btn-primary" type="submit" value="Save Changes" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+{% endblock %}

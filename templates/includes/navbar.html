@@ -1,0 +1,133 @@
+{% load static %}
+
+<header class="section-header">
+<nav class="py-lg-2 navbar p-md-0 px-sm-0 navbar-expand-md navbar-dark border-bottom" style="background: black;">
+<div class="container">
+  <a class="navbar-brand mx-auto" href="{% url 'home' %}"><img src="{% static 'images/footy-logo.png' %}" alt="" style="width: 200px; height: 40px; cursor:pointer;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="cursor:pointer;">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse w-100" id="navbarTop4">
+    <ul class="navbar-nav mx-auto px-sm-2" style="float: right; cursor:pointer;">
+    	<li class="nav-item dropdown">
+		 	<a href="{% url 'home' %}" class="nav-link" style="float: left">   Home </a>
+		</li>
+		<li class="nav-item dropdown">
+			<a href="{% url 'store' %}" class="store-btn text-white nav-link btn px-4 mx-3 text-white" style="float: left"> STORE</a>
+		</li>
+		<li class="nav-item dropdown">
+		 	<a href="#" class="nav-link" style="float: left">  About Us </a>
+		</li>
+    </ul>
+
+	<ul class="navbar-nav ml-sm-2" style="cursor:pointer;">
+		{% if user.is_authenticated %}
+			<div class="widget-header">
+				<small class="text-light title">Welcome {{ user.first_name }}</small>
+				<div>
+					<a href="{% url 'dashboard' %}" class="text-light mr-1">Dashboard</a> <span class="dark-transp"> | </span>
+					<a href="{% url 'logout' %}" class="text-light ml-1"> Logout</a>
+				</div>
+			</div>
+		{% else %}
+		    <div class="widget-header">
+				<small class="text-light title">Welcome guest</small>
+				<div>
+					<a href="{% url 'login' %}" class="text-light mr-1">Log In</a> <span class="dark-transp"> | </span>
+					<a href="{% url 'register' %}" class="text-light ml-1">Register</a>
+				</div>
+			</div>
+		{% endif %}
+	</ul> <!-- list-inline //  -->
+
+  </div> <!-- navbar-collapse .// -->
+</div> <!-- container //  -->
+</nav>
+
+<!--	CATEGORIZATION     -->
+<nav class="navbar navbar-expand-md navbar-light">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2" style="cursor:pointer;">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+	<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+
+		<ul class="navbar-nav mr-auto ml-3" style="cursor:pointer;">
+		{% for league in leagues %}
+			<li class="nav-item dropdown">
+				<div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span>
+						<img src="{{ league.img.url }}" class="rounded-circle" alt="" style="width: 25px; height: 25px">
+						<small class="ml-1 text-dark" style="font-size: 13px;">{{ league.name }}</small>
+					</span>
+				</div>
+				<div class="dropdown-menu" aria-labelledby="#navbarDropdown">
+				{% for club in clubs %}
+					{% if club.league == league %}
+					<a class="d-flex align-items-center pl-2 my-3 dropdown-item" href="{% url 'related_products' club.slug %}">
+						<img src="{{ club.img.url }}" alt="" style="width: 35px; height: 35px;">
+						<p class="ml-2">{{ club.name }}</p>
+					</a>
+					{% endif %}
+				{% endfor %}
+				</div>
+		    </li>  <!-- category-wrap.// -->
+		{% endfor %}
+		</ul>
+
+		<a href="{% url 'retro' %}" class="btn retro-btn" style="padding: 10px 30px">
+			<i class="fa fa-shirtsinbulk mr-2" aria-hidden="true"></i>RETRO STORE
+		</a>
+
+		<ul class="navbar-nav ml-auto mr-3 my-sm-2 my-lg-0" style="cursor:pointer;">
+<!--			<li class="mr-3 mb-sm-2">-->
+<!--				<a href="#" class="widget-header">-->
+<!--					<div class="icon icon-sm rounded-circle border"><i class="fa fa-heart"></i>-->
+<!--					   <span class="badge badge-pill badge-danger notify">0</span>-->
+<!--					</div>-->
+<!--				</a>-->
+<!--			</li>-->
+			<li>
+				<a href="{% url 'shopping-cart' %}" class="widget-header">
+					<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-bag"></i>
+					<span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
+					</div>
+				</a>
+			</li>
+	    </ul>
+
+	</div>
+</nav>
+
+<!--			<div class="col-lg-2 col-sm-6 col-8 order-2 order-lg-3">-->
+<!--				<div class="d-flex justify-content-end mb-3 mb-lg-0" style="gap: 20px;padding-right: 10px;">-->
+<!--					<a href="#" class="widget-header">-->
+<!--						<img src="{% static 'images/wishlist.jpg' %}" alt="" style="width: 30px; height: 30px;">-->
+<!--						<span class="badge badge-pill badge-danger notify">0</span>-->
+<!--					</a>-->
+<!--					<a href="{% url 'shopping-cart' %}" class="widget-header">-->
+<!--						<img src="{% static 'images/cart.png' %}" alt="" style="width: 30px; height: 30px;">-->
+<!--						<span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>-->
+<!--					</a>-->
+<!--				</div> &lt;!&ndash; widgets-wrap.// &ndash;&gt;-->
+<!--	        </div> &lt;!&ndash; col.// &ndash;&gt;-->
+
+
+<!--	<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">-->
+<!--				<div class="d-flex justify-content-end mb-3 mb-lg-0">-->
+<!--					<div class="widget-header">-->
+<!--						<small class="title text-muted">Welcome guest!</small>-->
+<!--						<div>-->
+<!--							<a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span>-->
+<!--							<a href="./register.html"> Register</a>-->
+<!--						</div>-->
+<!--					</div>-->
+
+<!--				</div> &lt;!&ndash; widgets-wrap.// &ndash;&gt;-->
+<!--			</div> &lt;!&ndash; col.// &ndash;&gt;-->
+
+
+</header> <!-- section-header.// -->
+

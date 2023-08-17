@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+            {% include 'includes/dashboard_sidebar.html' %}
+            <div class="col-md-9">
+                <div class="rounded">
+                    <div class="table-responsive table-borderless">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <div class="toggle-btn">
+                                            <div class="inner-circle"></div>
+                                        </div>
+                                    </th>
+                                    <th>Order #</th>
+                                    <th>Shipping name</th>
+                                    <th>Phone</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Ordered at</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body">
+                            {% for order in orders %}
+                                <tr class="cell-1">
+                                    <td class="text-center">
+                                        <div class="toggle-btn">
+                                            <div class="inner-circle"></div>
+                                        </div>
+                                    </td>
+                                    <td><a href="{% url 'order_detail' order.order_number %}">{{ order.order_number }}</a></td>
+                                    <td>{{ order.fullname }}</td>
+                                    <td>{{ order.phone }}</td>
+                                    <td>{{ order.total }}</td>
+
+                                    <td>
+                                        {% if order.order_status == 'New' %}
+                                           <span class="badge {{ new }}">{{ order.order_status }}</span>
+                                        {% elif order.order_status == 'Accepted' %}
+                                           <span class="badge {{ accepted }}">{{ order.order_status }}</span>
+                                        {% elif order.order_status == 'Completed' %}
+                                           <span class="badge {{ completed }}">{{ order.order_status }}</span>
+                                        {% else %}
+                                           <span class="badge {{ cancelled }}">{{ order.order_status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ order.ordered_at|date:'d M Y' }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

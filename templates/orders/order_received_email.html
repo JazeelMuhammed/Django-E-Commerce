@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+Hi {{ user.first_name }},
+
+Thank you for shopping! Your orders hasn't shipped yet, but we'll send you an email when it does.
+
+OrderID = {{ order.order_number }}
+
+{% endautoescape %}

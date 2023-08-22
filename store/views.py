@@ -47,10 +47,16 @@ def store(request, club_slug=None, maradona_slug=None):
     return render(request, 'store/store.html', context)
 
 
-def get_by_size(request, size):
-    variation_products = Variation.objects.all().filter(size=size)
+def category(request, size):
+    vars = Variation.objects.values('size').distinct()
+    sizes = [i['size'] for i in vars]
+    variation_products = Variation.objects.all()
+
+    variations = Variation.objects.all().filter(size=size)
     context = {
-        'variation_products': variation_products
+        'sizes': sizes,
+        'variation_products': variation_products,
+        'variations': variations
     }
     return render(request, 'store/variation.html', context)
 

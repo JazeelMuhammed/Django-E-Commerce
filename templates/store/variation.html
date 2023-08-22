@@ -49,25 +49,12 @@
 		</header>
 		<div class="filter-content collapse show" id="collapse_4" style="">
 			<div class="card-body">
+			{% for i in sizes %}
 			  <label class="checkbox-btn">
-			    <input type="checkbox {% if '/xs/' in request.path %}active{% endif %}">
-			    <span class="btn btn-light"> XS </span>
+			    <input type="checkbox">
+			    <a class="btn btn-light"  href="{% url 'category' i %}"> {{ i }} </a>
 			  </label>
-
-			  <label class="checkbox-btn">
-			    <input type="checkbox {% if '/sm/' in request.path %}active{% endif %}">
-			    <span class="btn btn-light"> SM </span>
-			  </label>
-
-			  <label class="checkbox-btn">
-			    <input type="checkbox {% if '/lg/' in request.path %}active{% endif %}">
-			    <span class="btn btn-light"> LG </span>
-			  </label>
-
-			  <label class="checkbox-btn">
-			    <input type="checkbox {% if '/xl/' in request.path %}active{% endif %}">
-			    <span class="btn btn-light"> XL </span>
-			  </label>
+            {% endfor %}
 		</div><!-- card-body.// -->
 		</div>
 	</article> <!-- filter-group .// -->
@@ -85,32 +72,33 @@
 </header><!-- sect-heading -->
 
 <div class="row">
-	{% for product in products %}
-	<div class="col-md-4">
-		<figure class="card card-product-grid">
-			<div class="img-wrap" style="position: relative; text-align: center;">
-				{% if product.stock <= 0 %}
-				<img src="{{ product.product_img.url }}" class="no-stock">
-				<div class="centered"><b>Out of Stock</b></div>
-				{% else %}
-				<img src="{{ product.product_img.url }}">
-				{% endif %}
-			</div> <!-- img-wrap.// -->
-			<figcaption class="info-wrap">
-				<div class="fix-height">
-					<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
-					<div class="price-wrap mt-2">
-						<span class="price">${{ product.discount_price }}</span>
-						<del class="price-old">${{ product.actual_price }}</del>
-					</div> <!-- price-wrap.// -->
-				</div>
-				<a href="{{ product.get_url }}" class="btn btn-block btn-primary">View Product </a>
-			</figcaption>
-		</figure>
-	</div> <!-- col.// -->
-	{% endfor %}
+	{% if variations %}
+		{% for i in variations %}
+		<div class="col-md-4">
+			<figure class="card card-product-grid">
+				<div class="img-wrap" style="position: relative; text-align: center;">
+					{% if i.product.stock <= 0 %}
+					<img src="{{ i.product.product_img.url }}" class="no-stock">
+					<div class="centered"><b>Out of Stock</b></div>
+					{% else %}
+					<img src="{{ i.product.product_img.url }}">
+					{% endif %}
+				</div> <!-- img-wrap.// -->
+				<figcaption class="info-wrap">
+					<div class="fix-height">
+						<a href="{{ i.product.get_url }}" class="title">{{ i.product.product_name }}</a>
+						<div class="price-wrap mt-2">
+							<span class="price">${{ i.product.discount_price }}</span>
+							<del class="price-old">${{ i.product.actual_price }}</del>
+						</div> <!-- price-wrap.// -->
+					</div>
+					<a href="{{ i.product.get_url }}" class="btn btn-block btn-primary">View Product </a>
+				</figcaption>
+			</figure>
+		</div> <!-- col.// -->
+		{% endfor %}
+	{% endif %}
 </div> <!-- row end.// -->
-
 
 <nav class="mt-4" aria-label="Page navigation sample">
   {% if products.has_other_pages %}

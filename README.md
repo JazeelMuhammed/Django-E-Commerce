@@ -1,8 +1,8 @@
 # Django-E-Commerce
 An advanced E-commerec website built using djang
 
-Live link -
-[relative link](https://jzeel.pythonanywhere.com/)
+Live Demo -
+[Click on this](https://jzeel.pythonanywhere.com/)
 
 # Screenshot
 ![Screenshot (4)](https://github.com/JazeelMuhammed/Django-E-Commerce/assets/126056206/4114596d-9cf9-49f0-9b7d-118ab3a2d062)

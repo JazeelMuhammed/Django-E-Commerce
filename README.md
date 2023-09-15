@@ -1,6 +1,9 @@
 # Django-E-Commerce
 An advanced E-commerec website built using djang
 
+Live link -
+[relative link](https://jzeel.pythonanywhere.com/)
+
 # Screenshot
 ![Screenshot (4)](https://github.com/JazeelMuhammed/Django-E-Commerce/assets/126056206/4114596d-9cf9-49f0-9b7d-118ab3a2d062)
 ![Screenshot (6)](https://github.com/JazeelMuhammed/Django-E-Commerce/assets/126056206/5649931b-ad91-4203-bcc6-0d9794f8f8ca)
@@ -12,5 +15,19 @@ To get this project up and running you should start by having Python installed o
 ```bash
 pip install virtualenv
 ```
+To make a virtual-environment 
+```bash
+python -m venv <env-name>
+```
+To activate
+```Scripts/activate.bat```
+
+Now you can run the project with this command
+```python manage.py runserver```
+
+
+
+
+
 
 

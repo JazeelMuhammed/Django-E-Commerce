@@ -1,5 +1,5 @@
 # Django-E-Commerce
-An advanced E-commerec website built using Python Django and Ajax
+An advanced E-commerce website built using Python Django and Ajax which includes all the necessary modules required for a seamless shopping experience.
 
 Live Demo -
 [Click on this](https://jzeel.pythonanywhere.com/)

@@ -1,5 +1,5 @@
 # Django-E-Commerce
-An advanced E-commerec website built using djang
+An advanced E-commerec website built using Python Django and Ajax
 
 Live Demo -
 [Click on this](https://jzeel.pythonanywhere.com/)
